@@ -18,10 +18,7 @@ class QuestionAdmin(admin.ModelAdmin):
     search_fields = ['question_text']
     list_display = ('question_text', 'pub_date', 'was_published_recently')
 
-class OpticalTypesAdmin(admin.ModelAdmin):
-    fields = ('types', )
 
-admin.site.register(OpticalTypes, OpticalTypesAdmin)
 
 admin.site.register(Question, QuestionAdmin)
 
@@ -33,4 +30,4 @@ admin.site.register(Article)
 
 admin.site.register(OpticalTypeflag)
 
-# admin.site.register(OpticalTypes)
+admin.site.register(OpticalTypes)

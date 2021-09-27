@@ -63,11 +63,4 @@ class OpticalTypeflag(models.Model):
 class OpticalTypes(models.Model):
     title = models.CharField(max_length=30)
     opticaltypeflags = models.ManyToManyField(OpticalTypeflag)
-    your_choices = (
-        ('1', u'yellow'),
-        ('2', u'red'),
-        ('3', u'black'),
-    )
-    types = models.CharField(max_length=32, choices=your_choices, null=True, blank=True)
-
-
+    
