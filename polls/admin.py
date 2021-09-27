@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Choice, Post, Question, Publication, Article
+from .models import Choice, Post, Question, Publication, Article, OpticalTypeflag, OpticalTypes
 
 
 class ChoiceInline(admin.TabularInline):
@@ -25,3 +25,7 @@ admin.site.register(Post)
 admin.site.register(Publication)
 
 admin.site.register(Article)
+
+admin.site.register(OpticalTypeflag)
+
+admin.site.register(OpticalTypes)

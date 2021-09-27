@@ -53,3 +53,13 @@ class Article(models.Model):
 
     def __str__(self):
         return self.headline
+
+class OpticalTypeflag(models.Model):
+    title = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.title 
+
+class OpticalTypes(models.Model):
+    title = models.CharField(max_length=30)
+    
