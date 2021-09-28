@@ -27,12 +27,7 @@ class Choice(models.Model):
     def __str__(self):
         return self.choice_text
 
-class Post(models.Model):
-    title = models.TextField()
-    cover = models.ImageField(upload_to='images/')
-
-    def __str__(self):
-        return self.title        
+  
 
 
 class Publication(models.Model):
@@ -54,7 +49,20 @@ class Article(models.Model):
     def __str__(self):
         return self.headline
 
-class OpticalTypeflag(models.Model):
+# Lens App Models
+
+# class Kelvin(models.Model):
+#     title = models.CharField(max_length=30)
+
+class Post(models.Model):
+    title = models.CharField(max_length=30)
+    cover = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return self.title      
+
+
+class OpticalTypeFlag(models.Model):
     title = models.CharField(max_length=30)
 
     def __str__(self):
@@ -62,5 +70,14 @@ class OpticalTypeflag(models.Model):
 
 class OpticalTypes(models.Model):
     title = models.CharField(max_length=30)
-    opticaltypeflags = models.ManyToManyField(OpticalTypeflag)
+    opticaltypeflags = models.ManyToManyField(OpticalTypeFlag)
+    def __str__(self):
+        return self.title
     
+class Kelvin(models.Model):
+    title = models.CharField(max_length=30)
+    post = models.ManyToManyField(Post)
+    cover = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return self.title 
