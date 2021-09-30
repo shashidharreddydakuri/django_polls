@@ -51,15 +51,28 @@ class Article(models.Model):
 
 # Lens App Models
 
-# class Kelvin(models.Model):
+# class KelvinInstrument(models.Model):
 #     title = models.CharField(max_length=30)
+
+
+class Kelvin(models.Model):
+    title = models.CharField(max_length=30)
+    def __str__(self):
+        return self.title 
+    
+#     cover = models.ImageField(upload_to='images/')
+
+    
 
 class Post(models.Model):
     title = models.CharField(max_length=30)
     cover = models.ImageField(upload_to='images/')
+    # kelvin = models.ForeignKey(Kelvin, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title      
+
+
 
 
 class OpticalTypeFlag(models.Model):
@@ -74,10 +87,9 @@ class OpticalTypes(models.Model):
     def __str__(self):
         return self.title
     
-class Kelvin(models.Model):
-    title = models.CharField(max_length=30)
-    post = models.ManyToManyField(Post)
-    cover = models.ImageField(upload_to='images/')
+# class project(models.Model):
+#     title = models.CharField(max_length=50)
+    
 
-    def __str__(self):
-        return self.title 
+#     def __str__(self):
+#         return self.title 

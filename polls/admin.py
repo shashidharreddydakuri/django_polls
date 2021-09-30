@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Choice, Kelvin, Post, Question, Publication, Article, OpticalTypeFlag, OpticalTypes
+from .models import Choice, Post, Question, Publication, Article, OpticalTypeFlag, OpticalTypes, Kelvin
 
 
 class ChoiceInline(admin.TabularInline):
@@ -28,12 +28,14 @@ class OpticalType(admin.ModelAdmin):
 
 class PostInline(admin.TabularInline):
     model = Post
+    extra = 3 
 
-class KelvinAdmin(admin.ModelAdmin):
-    fields = ('name', 'title', 'cover')
-    inlines = [PostInline]
-    extra = 3
-
+# class KelvinAdmin(admin.ModelAdmin):
+#     # fields = ('name', 'title')
+#     inlines = [PostInline]
+    
+# class Project(admin.ModelAdmin):
+#     fields = ('title')
 
 
 
@@ -50,3 +52,5 @@ admin.site.register(Article)
 admin.site.register(OpticalTypeFlag)
 
 admin.site.register(OpticalTypes)
+
+# admin.site.register(project)
