@@ -87,9 +87,21 @@ class OpticalTypes(models.Model):
     def __str__(self):
         return self.title
     
-# class project(models.Model):
-#     title = models.CharField(max_length=50)
+class Project(models.Model):
+    title = models.CharField(max_length=50)
+    def __str__(self):
+        return self.title 
+
+
+class Manufacturer(models.Model):
+    title = models.CharField(max_length=50)
+    def __str__(self):
+        return self.title 
     
 
-#     def __str__(self):
-#         return self.title 
+class Lens(models.Model):
+    title = models.CharField(max_length=50)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.title 

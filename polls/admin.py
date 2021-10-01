@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Choice, Post, Question, Publication, Article, OpticalTypeFlag, OpticalTypes, Kelvin
+from .models import Choice, Lens, Manufacturer, Post, Question, Publication, Article, OpticalTypeFlag, OpticalTypes, Kelvin, Project
 
 
 class ChoiceInline(admin.TabularInline):
@@ -23,7 +23,7 @@ class OpticalTypeFlagInline(admin.TabularInline):
     
 
 class OpticalType(admin.ModelAdmin):
-    fields = ('name', 'title')
+    fields = ('title')
     inlines = [OpticalTypeFlagInline]
 
 class PostInline(admin.TabularInline):
@@ -37,6 +37,15 @@ class PostInline(admin.TabularInline):
 # class Project(admin.ModelAdmin):
 #     fields = ('title')
 
+class ProjectInline(admin.TabularInline):
+    model = Project
+
+class ManufacturerInline(admin.TabularInline):
+    model = Manufacturer
+
+class LensAdmin(admin.ModelAdmin):
+    fields = ('title')
+    inlines = [ProjectInline, ManufacturerInline]
 
 
 admin.site.register(Question, QuestionAdmin)
@@ -53,4 +62,8 @@ admin.site.register(OpticalTypeFlag)
 
 admin.site.register(OpticalTypes)
 
-# admin.site.register(project)
+admin.site.register(Project)
+
+admin.site.register(Manufacturer)
+
+admin.site.register(Lens)
