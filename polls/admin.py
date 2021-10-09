@@ -1,7 +1,24 @@
 from django.contrib import admin
 
-from .models import Choice, Lens, Manufacturer, Post, Question, Publication, Article, OpticalTypeFlag, OpticalTypes, Kelvin, Project
+# from polls.models import QuestionModel
 
+# from .models import Choice, Lens, Manufacturer, Material, Post, Question, Publication, Article, OpticalTypeFlag, OpticalTypes, Kelvin, Project
+
+from polls.models.QuestionModel import Question
+from polls.models.ChoiceModel import Choice
+from polls.models.PublicationModel import Publication
+from polls.models.ArticleModel import Article
+from polls.models.KelvinModel import Kelvin
+from polls.models.PostModel import Post
+from polls.models.OpticalTypeFlagModel import OpticalTypeFlag
+from polls.models.OpticalTypesModel import OpticalTypes
+from polls.models.ProjectModel import Project
+from polls.models.ManufacturerModel import Manufacturer
+from polls.models.MaterialModel import Material
+from polls.models.LensModel import Lens
+from polls.models.BrandsModel import Brand
+from polls.models.CurveModel import BaseCurve, DIACurve
+from polls.models.BlogModel import Blog
 
 class ChoiceInline(admin.TabularInline):
     model = Choice
@@ -44,9 +61,30 @@ class ManufacturerInline(admin.TabularInline):
     model = Manufacturer
 
 class LensAdmin(admin.ModelAdmin):
-    fields = ('title')
-    inlines = [ProjectInline, ManufacturerInline]
+    fields = ('title', 'manufacturer', 'project', 'material')
+    # readonly_fields = ("created", "updated")
+    # inlines = [ProjectInline, ManufacturerInline]
 
+
+class BaseCurveInline(admin.TabularInline):
+    model = BaseCurve
+    extra = 3
+
+class DIACurveInline(admin.TabularInline):
+    model = DIACurve
+    Extra = 3
+
+class BrandAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None,               {'fields': ['title']}),
+        ('Date information', {'fields': ['created'], 'classes': ['collapse']}),
+    ]
+    inlines = [BaseCurveInline, DIACurveInline]
+
+
+@admin.register(Blog)
+class BlogAdmin(admin.ModelAdmin):
+    pass
 
 admin.site.register(Question, QuestionAdmin)
 
@@ -67,3 +105,7 @@ admin.site.register(Project)
 admin.site.register(Manufacturer)
 
 admin.site.register(Lens)
+
+admin.site.register(Material)
+
+admin.site.register(Brand, BrandAdmin)

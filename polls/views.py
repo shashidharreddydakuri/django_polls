@@ -4,8 +4,11 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 
+from polls.models.BlogModel import Blog
+
 from .models import Choice, Question
 
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
 class IndexView(generic.ListView):
@@ -53,3 +56,35 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+# class SearchLens(generic.ListView):
+#     template_name = 'polls/searchlens.html'
+
+    
+def searchlens_page(request):
+    return render(request, "polls/searchlens.html")
+
+@user_passes_test(lambda user: user.is_staff)
+def listing(request):
+    data = {
+        "blogs": Blog.objects.all(),
+    }
+
+    return render(request, "polls/listing.html", data)
+
+# view_blog
+
+@login_required
+def view_blog(request, blog_id):
+    blog = get_object_or_404(Blog, id=blog_id)
+    data = {
+        "blog": blog,
+    }
+
+    return render(request, "polls/view_blog.html", data)
+
+
+@login_required
+@user_passes_test(lambda user: user.is_staff)
+def home(request):
+    return render(request, "polls/home.html")
